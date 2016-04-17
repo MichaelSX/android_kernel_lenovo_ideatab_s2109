@@ -1,0 +1,1 @@
+obj-y               += fih_amplifier.o

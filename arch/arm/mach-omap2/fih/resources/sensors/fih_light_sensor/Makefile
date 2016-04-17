@@ -1,0 +1,1 @@
+obj-y               += fih_light_sensors.o

@@ -1,0 +1,1 @@
+obj-y               += go9_proj.o

@@ -1,0 +1,17 @@
+config VIDEO_OMAP4
+	tristate "OMAP4 Interface driver"
+	depends on VIDEO_DEV && ARCH_OMAP4 && SOC_CAMERA
+	select VIDEOBUF_DMA_CONTIG
+	---help---
+	  This is a v4l2 driver for the OMAP4 CSI2 Interface
+
+config VIDEO_OMAP4_USE_PREALLOC
+	bool "Use ISS preallocated contiguous buffer for MMAP"
+	default y
+	depends on VIDEO_OMAP4
+	---help---
+	  This makes use of the preallocated physically contiguous
+	  buffer for mmap buffer operations.
+
+	  If this is deactivated, TILER API for allocation will be
+	  used instead.

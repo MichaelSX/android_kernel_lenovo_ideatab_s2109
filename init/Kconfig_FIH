@@ -1,0 +1,330 @@
+menuconfig FIH_CONFIG_GROUP
+    bool "FIH Configurations Group"
+    default y
+    help
+        Turn on this group to enable FIH's configurations menu
+
+if FIH_CONFIG_GROUP
+    comment "FIH Project Flags for FIH_CONFIG_GROUP"
+
+    choice
+        prompt "Select a project name"
+        default FIH_PROJECT_GOX
+
+        config FIH_PROJECT_GOX
+            bool "01 FIH_PROJECT_GOX"
+            help
+                Enable the support for FIH_PROJECT_GOX flag
+
+        config FIH_PROJECT_JEM
+            bool "02 FIH_PROJECT_JEM"
+            help
+                Enable the support for FIH_PROJECT_JEM flag
+    endchoice
+    
+    # --- FIH_PROJECT_GOX{-------------------------------------------------- START
+    # ***********************************************************    
+    # Project configurations for FIH_PROJECT_GOX
+    # ***********************************************************
+    menu "Configurations for FIH_PROJECT_GOX"
+        depends on FIH_PROJECT_GOX
+
+        menuconfig FIH_SENSORS
+            bool "FIH sensors"
+            help
+                Turn on this group to enable FIH's sensor configurations menu
+
+        if FIH_SENSORS
+
+            config INPUT_SENSORS
+                bool "enable yamaha sensors driver release"
+                depends on FIH_CONFIG_GROUP
+                help
+                    enable yamaha sensors driver release
+
+            menuconfig FIH_LIGHT_SENSORS
+                bool "FIH light sensors"
+                depends on FIH_SENSORS
+                help
+                    Turn on this group to enable FIH's sensor configurations menu
+                
+                if FIH_LIGHT_SENSORS
+                    config INPUT_CM3202_ALS
+                    tristate "CAPELLA CM3202 Light Sensor"
+                    depends on FIH_LIGHT_SENSORS
+                    help
+                        Say Y here to enable support for CAPELLA Sensor Driver.
+                        If unsure, say N.
+                        To compile this driver as module, choose M here: the
+                        module will be called cm3202_als.
+                endif
+        endif
+        
+        menuconfig FIH_WIFI
+            bool "FIH wifi"
+            help
+                Turn on this group to enable FIH's wifi configurations menu
+
+        if FIH_WIFI
+
+            config BROADCOM_BCM4330
+                bool "Broadcom BCM4330 for BT/FM solution"
+                depends on FIH_CONFIG_GROUP
+                help
+                    Broadcom BCM4330 Driver implement by FIH.
+
+        endif
+
+        menuconfig FIH_TOUCHSCREEN
+            bool "FIH touch screen"
+            help
+                Turn on this group to enable FIH's touch screen configurations menu
+
+        if FIH_TOUCHSCREEN
+
+            config FIH_TOUCHSCREEN_ATMEL_QT602240
+                bool "FIH_TOUCHSCREEN_ATMEL_QT602240"
+                help
+                    Enable ATMEL QT602240 Touch
+
+            config TOUCHSCREEN_FOCALTECH_FT5606
+                tristate "Focaltech FT5606 touchscreen"
+                depends on FIH_TOUCHSCREEN && I2C
+                help
+                    Say Y here to enable support for Focaltech FT5606
+                    series touchscreen controller.
+
+                    If unsure, say N.
+
+                    To compile this driver as module, choose M here: the
+                    module will be called ft5x0x_ts
+        endif
+
+        menuconfig FIH_BT
+            bool "FIH BT"
+            help
+                Turn on this group to enable FIH's BT configurations menu
+
+        if FIH_BT
+
+            config BROADCOM_BCM4330_BLUETOOTH
+                bool "Broadcom BCM4330 for Bluetooth solution"
+                depends on BROADCOM_BCM4330
+                help
+                    Broadcom BCM4330 bluetooth Driver implement by FIH.
+
+        endif
+
+        menuconfig FIH_LCM
+            bool "FIH LCM"
+            help
+                Turn on this group to enable FIH's LCM configurations menu
+
+        menuconfig FIH_KEYPAD
+            bool "FIH keypad"
+            help
+                Turn on this group to enable FIH's keypad configurations menu
+
+        if FIH_KEYPAD
+
+            config FIH_KEYBOARD_GPIO
+                bool "use FIH gpio keyboard"
+                depends on GENERIC_GPIO
+                help
+                    use FIH gpio keyboard
+
+        endif
+
+        menuconfig FIH_LED
+            bool "FIH LED"
+            help
+                Turn on this group to enable FIH's LED configurations menu
+
+        if FIH_LED
+
+            config LEDS_SC668
+                bool "LEDS_SC668"
+                help
+                    Enable SEMTECH SC668 8 LEDs Light Management Unit
+                    
+        endif
+
+        menuconfig FIH_CAM
+            bool "FIH Camera"
+            help
+                Turn on this group to enable FIH's camera configurations menu
+                
+        if FIH_CAM
+
+	     #//SW4-L1-HL-Camera-FTM_BringUp-00+{        
+            config MT9M114
+	            bool "Sensor mt9m114 (1.26M YUV)"
+	            ---help---
+	            Aptina 1.26M SOC Sensor
+	     #//SW4-L1-HL-Camera-FTM_BringUp-00+}
+        
+        endif
+
+        menuconfig FIH_DEBUG
+            bool "FIH DEBUG"
+            help
+                Turn on this group to enable FIH's DEBUG configurations menu
+
+        if FIH_DEBUG
+
+            config FIH_LAST_ALOG
+                bool "FIH LAST ALOG"
+                depends on FIH_CONFIG_GROUP
+                help
+                    Enable/Disable Last Alog       
+
+            config FIH_SUSPEND_RESUME_LOG
+                bool "FIH LOG about SUSPEND/RESUME"
+                depends on FIH_CONFIG_GROUP
+                help
+                    Enable suspend and resume log support
+
+        endif
+
+        menuconfig FIH_USB
+            bool "FIH USB"
+            help
+                Turn on this group to enable FIH's USB configurations menu
+        
+        if FIH_USB
+
+	config FIH_PID_SWITCH
+            bool "FIH_PID_SWITCH"
+            depends on FIH_USB
+            help
+                Enable/Disable PID Switch Function
+
+	config FIH_USB_PORTING
+            bool "FIH_USB_PORTING"
+            depends on FIH_USB
+            help
+                Enable/Disable  GOX USB Driver Function
+
+        config USB_ANDROID_ACCESSORY
+	    boolean "Android USB accessory function"
+	    depends on USB_ANDROID
+	    help
+	        Provides Android USB Accessory support for android gadget driver.
+        endif
+
+        menuconfig FIH_BATTERY
+            bool "FIH battery"
+            help
+                Turn on this group to enable FIH's battery configurations menu
+
+	if FIH_BATTERY
+		config BATTERY_BQ27520
+		tristate "BQ27520 battery driver"
+		depends on FIH_BATTERY && I2C
+		help
+		  Say Y here to enable support for batteries with BQ27520 (I2C) chips.
+	endif
+
+	menuconfig FIH_BACKLIGHT
+            bool "FIH backlight"
+            help
+                Turn on this group to enable FIH's backlight configurations menu
+
+	if FIH_BACKLIGHT
+		config BACKLIGHT_TPS61181
+		tristate "Backlight driver for TPS61180/1/2 chip"
+		depends on FIH_BACKLIGHT && BACKLIGHT_CLASS_DEVICE
+		help
+		  If you have a backlight driven by a OMAP4 CPU and TPS61181 chip, 
+		  say Y here to enable its driver.
+	endif
+
+	menuconfig FIH_CHARGER
+            bool "FIH charger"
+            help
+                Turn on this group to enable FIH's charger configurations menu
+
+	if FIH_CHARGER
+		config CHARGER_SMB347
+		tristate "SUMMIT SMB347 charger driver"
+		depends on FIH_CHARGER && I2C
+		help
+		  Say Y here to enable support for charger SUMMIT SMB347 (I2C) chips.
+	endif
+
+	config FIH_HW_INFO
+            bool "FIH hwid information"
+            help
+                Turn on this group to enable FIH's charger configurations menu
+
+	config FIH_SW_INFO
+            bool "FIH swid information"
+            help
+                Turn on this group to enable FIH's SW model info
+
+	config FIH_POWER_OFF
+            bool "FIH power off command"
+            help
+                Turn on this config for add command in reboot command for power-off control in u-boot
+
+	config FIH_EXTERNAL_POWER_GPIO
+	    bool "use for external power gpio irq"
+	    depends on GENERIC_GPIO
+	    help
+		use FIH external power gpio
+
+        menuconfig FIH_VIBRATOR
+            bool "FIH vibrator"
+            help
+                Turn on this group to enable FIH's vibrator configurations menu
+        
+        config FIH_FTM
+            bool "FIH_FTM"
+            help
+                Enable/Disable the build flag FIH_FTM.
+                
+        config FIH_LAST_ALOG
+            bool "FIH last alog mechanism"
+            default y
+
+                
+         config FIH_FXX
+            bool "FIH_FXX"
+            help
+                Enable FIH setting.	 
+
+         config FIH_BUILDTYPE_DEBUG
+             bool "Enable Build Type for Debug (Turn off this flag if you need a Release type)"
+
+	menuconfig FIH_AUDIO
+		bool "FIH audio"
+		help
+			Turn on this group to enable FIH's audio configurations menu
+				
+	if FIH_AUDIO
+		menuconfig FIH_AUDIO_AMPLIFIER
+			bool "FIH Audio Amplifier"
+			depends on FIH_AUDIO
+            help
+				Turn on this group to enable FIH's audio amplifier configurations menu
+
+			if FIH_AUDIO_AMPLIFIER
+				config AMPLIFIER_TPA2026D2
+					tristate "Audio driver for TPA2026D2 chip"
+					depends on FIH_AUDIO_AMPLIFIER && I2C
+					help
+						If you have a audio amplifier driven by a OMAP4 CPU and TPA2026D2 chip, 
+						say Y here to enable its driver.
+			endif		  
+	endif
+
+	config FIH_CDC3S04
+            bool "FIH TCXO clock buffer"
+            default y
+            help
+                Turn on this group to enable FIH's TCXO clock buffer
+
+    endmenu
+    # --- FIH_PROJECT_GOX}-------------------------------------------------- END
+
+endif
