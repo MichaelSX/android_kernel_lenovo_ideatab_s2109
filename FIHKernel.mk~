@@ -13,7 +13,7 @@ TARGET_OUT := $(PRODUCT_OUT)/system
 
 kernel_out := $(PRODUCT_OUT)/kernel
 
-include ideatab_s2109/AndroidKernel.mk
+include kernel/AndroidKernel.mk
 
 .PHONY: kernelonly
 kernelonly: $(kernel_out)

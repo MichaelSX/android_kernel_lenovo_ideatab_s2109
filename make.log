@@ -1,0 +1,14 @@
+scripts/kconfig/conf --silentoldconfig Kconfig
+/home/marschmidt/Programming/Android/CyanogenMod/S9512/system/kernel/lenovo/ideatab_s2109/scripts/kconfig/Makefile:33: die Regel für Ziel „silentoldconfig“ scheiterte
+/home/marschmidt/Programming/Android/CyanogenMod/S9512/system/kernel/lenovo/ideatab_s2109/Makefile:498: die Regel für Ziel „silentoldconfig“ scheiterte
+make[1]: Für das Ziel „/home/marschmidt/cm_s9512/kernel/lenovo/ideatab_s2109/build/fih_mak/fih_.make“ ist nichts zu tun.
+scripts/kconfig/conf --silentoldconfig Kconfig
+/home/marschmidt/Programming/Android/CyanogenMod/S9512/system/kernel/lenovo/ideatab_s2109/scripts/kconfig/Makefile:33: die Regel für Ziel „silentoldconfig“ scheiterte
+/home/marschmidt/Programming/Android/CyanogenMod/S9512/system/kernel/lenovo/ideatab_s2109/Makefile:498: die Regel für Ziel „silentoldconfig“ scheiterte
+make[1]: Für das Ziel „/home/marschmidt/cm_s9512/kernel/lenovo/ideatab_s2109/build/fih_mak/FIH_Rules.make“ ist nichts zu tun.
+***
+*** Can't find default configuration "arch/x86/configs/lifetab_s2109_defconfig"!
+***
+/home/marschmidt/Programming/Android/CyanogenMod/S9512/system/kernel/lenovo/ideatab_s2109/scripts/kconfig/Makefile:121: die Regel für Ziel „lifetab_s2109_defconfig“ scheiterte
+Makefile:498: die Regel für Ziel „lifetab_s2109_defconfig“ scheiterte
+Makefile:479: die Regel für Ziel „lifetab_s2109_defconfig“ scheiterte
